@@ -1,0 +1,258 @@
+<MyGraphAirTemp>:
+    id: air_temp
+<MyGraphAirHumid>:
+<MyGraphSoilHumid>:
+<MyGraphSoilPh>:
+<NavigationLayout>:
+
+Screen:
+    BoxLayout:
+        orientation: 'vertical'
+        MDToolbar:
+            title: "Smart Farm"
+            left_action_items: [["menu", lambda x: nav_draw.set_state()]]
+        Widget:
+    NavigationLayout:    
+        ScreenManager:
+            id: screen_manager
+            Screen:
+                name: "scr1"
+                MDGridLayout:
+                    cols: 2
+                    spacing: 60, 60
+                    padding: 60, 60
+                    size_hint_y: None
+                    height: self.minimum_height
+                    adaptive_height: True
+                    MDLabel:
+                        text: "Smart Farm last measures:"
+                        halign: "center"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                    MDLabel:
+                        text: app.date
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                    MDLabel:
+                        text: app.temp
+                        halign: "center"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1                          
+                    MDLabel:
+                        text: "Air temperature"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                    MDLabel:
+                        text: app.humid
+                        halign: "center"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                    MDLabel:
+                        text: "Air Humidity"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                    MDLabel:
+                        text: app.soilHumid
+                        halign: "center"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                    MDLabel:
+                        text: "Soil humidity"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                    MDLabel:
+                        text: app.soilPh
+                        halign: "center"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                    MDLabel:
+                        text: "Soil PH"
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+              
+                    MDRaisedButton:
+                        text: "Water"
+                        on_press:
+                            app.action()
+                    MDRaisedButton:
+                        text: "Open door"
+                        on_press:
+                            app.action()
+            Screen:
+                name: "scr2"
+                BoxLayout:
+                    orientation: 'vertical'
+                    Widget:
+                        size_hint: [1, .1]
+                    BoxLayout:    
+                        size_hint: [1, .7]
+                        MyGraphAirTemp:
+                            id: airTemp
+                    BoxLayout:
+                        orientation: "horizontal"
+                        size_hint: [1, .1]
+                        Button:
+                            text: "24 hours"
+                            bold: True
+                            on_press: airTemp.update_day()
+                        Button:
+                            text: "1 week"
+                            bold: True
+                            on_press: airTemp.update_week()
+                        Button:
+                            text: "1 month"
+                            bold: True
+                            on_press: airTemp.update_month()
+ 
+            Screen:
+                name: "scr3"
+                BoxLayout:
+                    orientation: 'vertical'
+                    Widget:
+                        size_hint: [1, .1]
+                    BoxLayout:    
+                        size_hint: [1, .7]
+                        MyGraphAirHumid:
+                            id: airHumid
+                    BoxLayout:
+                        orientation: "horizontal"
+                        size_hint: [1, .1]
+                        Button:
+                            text: "24 hours"
+                            bold: True
+                            on_press: airHumid.update_day()
+                        Button:
+                            text: "1 week"
+                            bold: True
+                            on_press: airHumid.update_week()
+                        Button:
+                            text: "1 month"
+                            bold: True
+                            on_press: airHumid.update_month()
+
+            Screen:
+                name: "scr4"
+                BoxLayout:
+                    orientation: 'vertical'
+                    Widget:
+                        size_hint: [1, .1]
+                    BoxLayout:    
+                        size_hint: [1, .7]
+                        MyGraphSoilHumid:
+                            id: soilHumid
+                    BoxLayout:
+                        orientation: "horizontal"
+                        size_hint: [1, .1]
+                        Button:
+                            text: "24 hours"
+                            bold: True
+                            on_press: soilHumid.update_day()
+                        Button:
+                            text: "1 week"
+                            bold: True
+                            on_press: soilHumid.update_week()
+                        Button:
+                            text: "1 month"
+                            bold: True
+                            on_press: soilHumid.update_month()
+
+            Screen:
+                name: "scr5"
+                BoxLayout:
+                    orientation: 'vertical'
+                    Widget:
+                        size_hint: [1, .1]
+                    BoxLayout:    
+                        size_hint: [1, .7]
+                        MyGraphSoilPh:
+                            id: soilPh
+                    BoxLayout:
+                        orientation: "horizontal"
+                        size_hint: [1, .1]
+                        Button:
+                            text: "24 hours"
+                            bold: True
+                            on_press: soilPh.update_day()
+                        Button:
+                            text: "1 week"
+                            bold: True
+                            on_press: soilPh.update_week()
+                        Button:
+                            text: "1 month"
+                            bold: True
+                            on_press: soilPh.update_month()
+
+        MDNavigationDrawer:
+            id: nav_draw
+            orientation: "vertical"
+            padding: "8dp"
+            spacing: "8dp"
+
+            AnchorLayout:
+                anchor_x: "left"
+                size_hint_y: None
+                height: avatar.height
+
+                Image:
+                    id: avatar
+                    size_hint: None, None
+                    size: "56dp", "56dp"
+                    source: "data/logo/kivy-icon-256.png"
+
+            MDLabel:
+                text: "Smart Farm"
+                font_style: "Button"
+                size_hint_y: None
+                height: self.texture_size[1]
+
+            MDLabel:
+                text: "user@gmail.com"
+                font_style: "Caption"
+                size_hint_y: None
+                height: self.texture_size[1]
+
+            ScrollView:
+                MDList:
+                    OneLineAvatarListItem:
+                        on_press:
+                            nav_draw.set_state("close")
+                            screen_manager.current = "scr1"
+
+                        text: "Home"
+                        IconLeftWidget:
+                            icon: "home"
+
+                    OneLineAvatarListItem:
+                        on_press:
+                            nav_draw.set_state("close")
+                            screen_manager.current = "scr2"
+                        text: "Temperature"
+                        IconLeftWidget:
+                            icon: 'information'
+
+                    OneLineAvatarListItem:
+                        on_press:
+                            nav_draw.set_state("close")
+                            screen_manager.current = "scr3"
+                        text: "Air humidity"
+                        IconLeftWidget:
+                            icon: 'information'                                
+
+                    OneLineAvatarListItem:
+                        on_press:
+                            nav_draw.set_state("close")
+                            screen_manager.current = "scr4"
+                        text: "Soil humidity"
+                        IconLeftWidget:
+                            icon: 'information'
+
+                    OneLineAvatarListItem:
+                        on_press:
+                            nav_draw.set_state("close")
+                            screen_manager.current = "scr5"
+                        text: "Soil Ph"
+                        IconLeftWidget:
+                            icon: 'information'
+
+            Widget:
+
